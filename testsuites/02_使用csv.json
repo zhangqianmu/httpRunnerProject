@@ -1,0 +1,16 @@
+{
+  "config": {
+    "name": "套件名称"
+  },
+  "testcases": [
+    {
+      "name": "育华生活注册用例",
+      "testcase": "testcases/03_育华生活注册.json",
+      "parameters": [
+        {
+          "username-password-phone-email": "${P(data/userList.csv)}"
+        }
+      ]
+    }
+  ]
+}

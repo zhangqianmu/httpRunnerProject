@@ -1,0 +1,84 @@
+{
+  "config": {
+    "base_url": "http://localhost:8080",
+    "name": "用例名称",
+    "variables": {}
+  },
+  "teststeps": [
+    {
+      "name": "oa验证码接口",
+      "request": {
+        "method": "GET",
+        "url": "/yhoa/captchaImage"
+      },
+      "extract": {
+        "uuid": "content.uuid"
+      },
+      "validate": [
+        {
+          "eq": [
+            "status_code",
+            200
+          ]
+        },
+        {
+            "eq": [
+                "content.code",
+                200
+          ]
+        }
+      ]
+    },
+    {
+      "name": "oa登录接口",
+      "request": {
+        "method": "POST",
+        "url": "/yhoa/login",
+        "json": {
+          "username": "admin",
+          "password": "admin123",
+          "code": "9999",
+          "uuid":"$uuid"
+        }
+      },
+      "extract": {
+        "token": "content.token"
+      },
+      "validate": [
+        {
+          "eq": [
+            "status_code",
+            200
+          ]
+        },
+        {
+            "eq": [
+                "content.code",
+                200
+          ]
+        }
+      ]
+    },
+    {"name": "oa获取部门列表",
+      "request": {
+        "method": "GET",
+        "url": "/yhoa/system/dept/treeselect",
+        "headers":{"Authorization": "$token"}
+      },
+      "validate": [
+        {
+          "eq": [
+            "status_code",
+            200
+          ]
+        },
+        {
+            "eq": [
+                "content.code",
+                200
+          ]
+        }
+      ]
+    }
+  ]
+}

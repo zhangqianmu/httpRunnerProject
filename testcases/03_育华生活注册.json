@@ -1,0 +1,36 @@
+{
+  "config": {
+    "base_url": "http://localhost:8080",
+    "name": "用例名称",
+    "variables": {}
+  },
+  "teststeps": [
+    {
+      "name": "育华生活注册接口",
+      "request": {
+        "method": "POST",
+        "url": "/fore/mforeRegister",
+        "data": {
+          "name": "$username",
+          "password": "$password",
+          "address": "$address",
+          "phone": "$phone"
+        }
+      },
+      "validate": [
+        {
+          "eq": [
+            "status_code",
+             200
+          ]
+        },
+        {
+          "eq": [
+            "content.status",
+             200
+          ]
+        }
+      ]
+    }
+  ]
+}

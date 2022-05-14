@@ -1,0 +1,100 @@
+{
+  "config": {
+    "base_url": "http://localhost:8080",
+    "name": "用例名称",
+    "variables": {}
+  },
+  "teststeps": [
+    {
+      "name": "oa验证码接口",
+      "request": {
+        "method": "GET",
+        "url": "/yhoa/captchaImage"
+      },
+      "extract": {
+        "uuid": "content.uuid"
+      },
+      "validate": [
+        {
+          "eq": [
+            "status_code",
+            200
+          ]
+        },
+        {
+            "eq": [
+                "content.code",
+                200
+          ]
+        }
+      ]
+    },
+    {
+      "name": "oa登录接口",
+      "request": {
+        "method": "POST",
+        "url": "/yhoa/login",
+        "json": {
+          "username": "admin",
+          "password": "admin123",
+          "code": "9999",
+          "uuid":"$uuid"
+        }
+      },
+      "extract": {
+        "token": "content.token"
+      },
+      "validate": [
+        {
+          "eq": [
+            "status_code",
+            200
+          ]
+        },
+        {
+            "eq": [
+                "content.code",
+                200
+          ]
+        }
+      ]
+    },
+    {
+      "name": "oa岗位添加接口",
+      "request": {
+        "url": "/yhoa/system/post",
+        "method": "POST",
+        "json": {
+          "postCode": "${ids()}",
+          "postName": "${choose()}",
+          "postSort": 0,
+          "status": "0"
+        },
+        "headers": {
+          "Authorization": "$token"
+        }
+      },
+      "validates":[{
+        "eq": ["status_code",200],
+        "eq": ["content.code",200]
+      }]
+    },
+    {
+      "name": "oa岗位列表获取接口",
+      "request": {
+        "url":"/yhoa/system/post/list",
+        "method": "GET",
+        "headers": {
+          "Authorization": "$token"
+        }
+      },
+      "extract": {
+        "postId": "content.rows.6.postId"
+      },
+      "validate":[{
+      "eq": ["status_code",200],
+      "eq": ["content.code",200]
+    }]
+    }
+  ]
+}

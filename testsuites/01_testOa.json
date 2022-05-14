@@ -1,0 +1,23 @@
+{
+  "config": {
+    "name": "测试oa流程"
+  },
+  "testcases": [
+    {
+      "name": "oa验证码测试",
+      "testcase": "testcases/01_oa验证码接口.json"
+    },
+    {
+      "name": "oa登录接口测试",
+      "testcase": "testcases/02_oa登录.json"
+    },
+    {
+      "name": "oa部门管理流程测试",
+      "testcase": "testcases/oa_部门管理.json"
+    },
+    {
+      "name": "oa岗位管理岗位添加流程测试",
+      "testcase": "testcases/oa_岗位管理.json"
+    }
+  ]
+}
